@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,16 +26,21 @@ public class UserModel implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
-
     @Column(unique = true, nullable = false, length = 50)
     private String userName;
-
     @Column(nullable = false, length = 150)
     private String userPassword;
+    //@ManyToMany(fetch = FetchType.EAGER) //Uma forma de evitar o carregamento lazy deste tipo de relacionamento
+    @ManyToMany
+    @JoinTable(name = "TB_USERS_ROLES",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<RoleModel> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roles; //Usar com roles;
+        //return null; //Usar sem roles
     }
 
     @Override

@@ -59,10 +59,10 @@ public class WebSecurityConfig {
 //        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //    }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() { //Necessário se não usar o User.withDefaultPasswordEncoder()
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() { //Necessário se não usar o User.withDefaultPasswordEncoder()
+        return new BCryptPasswordEncoder();
+    }
 
 //    @Bean
 //    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
