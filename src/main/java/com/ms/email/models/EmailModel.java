@@ -2,15 +2,21 @@ package com.ms.email.models;
 
 import com.ms.email.enums.StatusEmail;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "TB_EMAIL")
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmailModel implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
